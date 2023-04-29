@@ -1,0 +1,79 @@
+using UnityEngine;
+using Photon.Pun;
+
+public class CameraMovement : MonoBehaviourPun
+{
+    public bool isPanning;
+    private Transform playerCam;
+    [SerializeField] private float _speed;
+    [SerializeField] private float _drag;
+    [SerializeField] private float _dampAmount;
+    [SerializeField] private Vector2 minBounds;
+    [SerializeField] private Vector2 maxBounds;
+    private Vector2 currentVelocity;
+    private Vector2 remainingVelocity;
+    private bool inputReleased;
+
+    private void Start()
+    {
+        playerCam = this.transform;
+    }
+    private void FixedUpdate()
+    {
+        if (!photonView.IsMine) { return; }
+
+        if (UserInput.instance.Panning)
+        {
+            isPanning = true;
+            inputReleased = false;
+        }
+        else if (!UserInput.instance.Panning && currentVelocity != Vector2.zero)
+        {
+            isPanning = true;
+            inputReleased = true;
+        }
+        else
+        {
+            isPanning = false;
+        }
+
+        if (isPanning)
+        {
+            Panning();
+        }
+    }
+    public void Panning()
+    {
+        Vector2 moveVector;
+
+        if (!inputReleased)
+        {
+            moveVector = -UserInput.instance.MouseInput * _speed;
+        }
+        else
+        {
+            moveVector = remainingVelocity;
+        }
+        Vector2 targetPosition = new Vector2(playerCam.position.x + moveVector.x, playerCam.position.y + moveVector.y);
+        Vector2 smoothedPosition = Vector2.SmoothDamp(playerCam.position, targetPosition, ref currentVelocity, _dampAmount);
+
+        smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, minBounds.x, maxBounds.x);
+        smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, minBounds.y, maxBounds.y);
+
+        playerCam.position = new Vector3(smoothedPosition.x, smoothedPosition.y, 0);
+        if (inputReleased)
+        {
+            remainingVelocity = new Vector2(
+                Mathf.Lerp(currentVelocity.x, 0, _drag * Time.fixedDeltaTime),
+                Mathf.Lerp(currentVelocity.y, 0, _drag * Time.fixedDeltaTime)
+            );
+
+            if (remainingVelocity.magnitude < 0.01f)
+            {
+                remainingVelocity = Vector2.zero;
+                currentVelocity = Vector2.zero;
+                isPanning = false;
+            }
+        }
+    }
+}
