@@ -7,20 +7,43 @@ using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    [SerializeField] TMP_InputField Input;
+    [SerializeField] TMP_InputField nickInput;
+    [SerializeField] TMP_InputField codeInput;
 
     [SerializeField] byte maxPlayers;
 
+
     public void CreateRoom(){
+        PhotonNetwork.LocalPlayer.NickName = 
+            nickInput.text == "" ? "0" : 
+            nickInput.text == null ? "Undefined : Case 1" : 
+            nickInput.text;
+        if(PhotonNetwork.LocalPlayer.NickName.Length < 3){
+            nickInput.text = "Nick Length >3";
+            return;
+        }
+
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = maxPlayers;
-        PhotonNetwork.CreateRoom(Input.text, options, TypedLobby.Default);
+        PhotonNetwork.CreateRoom(codeInput.text, options, TypedLobby.Default);
     }
     public void JoinRoom(){
-        PhotonNetwork.JoinRoom(Input.text);
+        PhotonNetwork.LocalPlayer.NickName = 
+            nickInput.text == "" ? "0" : 
+            nickInput.text == null ? "Undefined : Case 1" : 
+            nickInput.text;
+        if(PhotonNetwork.LocalPlayer.NickName.Length < 3){
+            nickInput.text = "Nick Length >3";
+            return;
+        }
+
+        PhotonNetwork.JoinRoom(codeInput.text);
     }
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Lobby");
+    }
+    public void StartGame(){
+        PhotonNetwork.LoadLevel("Game");
     }
 }
