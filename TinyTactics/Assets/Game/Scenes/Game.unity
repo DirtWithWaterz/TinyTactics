@@ -20360,6 +20360,24 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
+  - m_RefCount: 0
+    m_Data:
+      e00: 0
+      e01: 0
+      e02: -1.8295932e-19
+      e03: -1.8295932e-19
+      e10: 0
+      e11: 0
+      e12: 5.45e-43
+      e13: 5.45e-43
+      e20: 4.3493468e+26
+      e21: 1e-45
+      e22: 1.2791904e-19
+      e23: -1.5874e-41
+      e30: 4.5904e-41
+      e31: 0
+      e32: 5.47e-43
+      e33: 5.5e-43
   m_TileColorArray:
   - m_RefCount: 1980
     m_Data: {r: 1, g: 1, b: 1, a: 1}
@@ -20447,7 +20465,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1963109889}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
