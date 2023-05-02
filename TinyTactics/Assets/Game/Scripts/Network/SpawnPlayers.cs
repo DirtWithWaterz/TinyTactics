@@ -23,10 +23,12 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
     void Start(){
         if(spawnOrder == SpawnOrder.Random){
+            Debug.Log("Calling SpawnRandom");
             SpawnRandom();
         }
         else{
-            SpawnRound();
+            Debug.Log("Calling SpawnRound");
+            StartCoroutine(SpawnRound());
         }
     }
     public void SpawnRandom()
@@ -37,7 +39,9 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
     }
     public IEnumerator SpawnRound()
     {
+        Debug.Log("1");
         yield return new WaitUntil(() => !otherPlayerSpawning);
+        Debug.Log("2");
         photonView.RPC(nameof(UpdateWaitStatus), RpcTarget.AllBufferedViaServer, true);
         int i = 3;
         if(Mathf.Min(
@@ -50,9 +54,11 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
         } else{
             i = 1;
         }
+        Debug.Log("3");
         PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[i].position, Quaternion.identity);
         photonView.RPC(nameof(UpdateSpawnPointPosition), RpcTarget.AllBufferedViaServer, i);
         photonView.RPC(nameof(UpdateWaitStatus), RpcTarget.AllBufferedViaServer, false);
+        Debug.Log("4");
     }
     [PunRPC]
     public void UpdateSpawnPointPosition(int i){

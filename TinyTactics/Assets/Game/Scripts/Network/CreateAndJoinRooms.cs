@@ -7,12 +7,19 @@ using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
+    public Transform _startButton;
     [SerializeField] TMP_InputField nickInput;
     [SerializeField] TMP_InputField codeInput;
 
     [SerializeField] byte maxPlayers;
 
-
+    private void Start()
+    {
+        if (PhotonNetwork.IsMasterClient){
+            _startButton.gameObject.SetActive(true);
+            PhotonNetwork.AutomaticallySyncScene = true;
+        }
+    }
     public void CreateRoom(){
         PhotonNetwork.LocalPlayer.NickName = 
             nickInput.text == "" ? "0" : 

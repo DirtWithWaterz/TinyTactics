@@ -155,7 +155,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f56ea79a5a41b46a7e774ee3ed2584, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Input: {fileID: 0}
+  _startButton: {fileID: 1652841683}
+  nickInput: {fileID: 0}
+  codeInput: {fileID: 0}
   maxPlayers: 0
 --- !u!114 &1423811053
 MonoBehaviour:
@@ -257,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1652841683
 RectTransform:
   m_ObjectHideFlags: 0
