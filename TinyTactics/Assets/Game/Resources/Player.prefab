@@ -209,6 +209,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPanning: 0
+  playerCam: {fileID: 8870236220295660940}
   _speed: 4
   _drag: 45
   _dampAmount: 1

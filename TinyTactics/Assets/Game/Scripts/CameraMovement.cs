@@ -4,7 +4,6 @@ using Photon.Pun;
 public class CameraMovement : MonoBehaviourPun
 {
     public bool isPanning;
-    private Transform playerCam;
     [SerializeField] private float _speed;
     [SerializeField] private float _drag;
     [SerializeField] private float _dampAmount;
@@ -14,11 +13,6 @@ public class CameraMovement : MonoBehaviourPun
     private Vector2 remainingVelocity;
     private bool inputReleased;
 
-    private void Start()
-    {
-        if (!photonView.IsMine) { return; } 
-        playerCam = this.transform;
-    }
     private void FixedUpdate()
     {
         if (!photonView.IsMine) { return; }
@@ -55,13 +49,13 @@ public class CameraMovement : MonoBehaviourPun
         {
             moveVector = remainingVelocity;
         }
-        Vector2 targetPosition = new Vector2(playerCam.position.x + moveVector.x, playerCam.position.y + moveVector.y);
-        Vector2 smoothedPosition = Vector2.SmoothDamp(playerCam.position, targetPosition, ref currentVelocity, _dampAmount);
+        Vector2 targetPosition = new Vector2(transform.position.x + moveVector.x, transform.position.y + moveVector.y);
+        Vector2 smoothedPosition = Vector2.SmoothDamp(transform.position, targetPosition, ref currentVelocity, _dampAmount);
 
         smoothedPosition.x = Mathf.Clamp(smoothedPosition.x, minBounds.x, maxBounds.x);
         smoothedPosition.y = Mathf.Clamp(smoothedPosition.y, minBounds.y, maxBounds.y);
 
-        playerCam.position = new Vector3(smoothedPosition.x, smoothedPosition.y, 0);
+        transform.position = new Vector3(smoothedPosition.x, smoothedPosition.y, 0);
         if (inputReleased)
         {
             remainingVelocity = new Vector2(
