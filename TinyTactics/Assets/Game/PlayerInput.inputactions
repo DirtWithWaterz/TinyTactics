@@ -15,9 +15,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Mouse",
-                    "type": "Value",
+                    "name": "Interact",
+                    "type": "Button",
                     "id": "4f35cc7a-1e44-4764-93ff-6cdc58909727",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MousePos",
+                    "type": "Value",
+                    "id": "64f1dd24-c2a9-4998-b7bb-a633146bb43b",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -39,11 +48,22 @@
                 {
                     "name": "",
                     "id": "47256bd8-bb8c-456a-badc-86b8d08ede4a",
-                    "path": "<Mouse>/delta",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Mouse",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e6c1120b-74f7-4587-8101-75602f29f223",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePos",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

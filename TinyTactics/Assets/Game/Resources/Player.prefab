@@ -468,7 +468,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9102577544835778465}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6275900655918698931}
+        m_TargetAssemblyTypeName: TilePlacer, Assembly-CSharp
+        m_MethodName: SelectTile
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Castle
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7611555626420299317
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,6 +619,7 @@ GameObject:
   - component: {fileID: 8870236220295660943}
   - component: {fileID: 8870236220295660928}
   - component: {fileID: 8371592797448216239}
+  - component: {fileID: 6275900655918698931}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -770,6 +783,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 4f35cc7a-1e44-4764-93ff-6cdc58909727
     m_ActionName: Controls/Mouse[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 64f1dd24-c2a9-4998-b7bb-a633146bb43b
+    m_ActionName: Controls/MousePos[/Mouse/position]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Controls
@@ -787,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61c9bd86bbfadc4db3afc8ea85795c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cam: {fileID: 8870236220295660940}
 --- !u!114 &8870236220295660928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -821,6 +839,25 @@ MonoBehaviour:
   m_SynchronizeRotation: 0
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &6275900655918698931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8870236220295660938}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59fee90f99b0e9b40808071c38727668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TileBases:
+  - {fileID: 11400000, guid: 42665d5351e2e954a99bd1fd34d7c6ec, type: 2}
+  TileDataObjects:
+  - {fileID: 3528797256660798231, guid: ae5ff87d9bdbcfd46a62346e9c4418d5, type: 3}
+  selectedTile: 
+  tilemap: {fileID: 0}
+  previewTile: {fileID: 0}
 --- !u!1 &9054551096396527780
 GameObject:
   m_ObjectHideFlags: 0
