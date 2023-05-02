@@ -8,27 +8,63 @@ using mudz;
 public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
-    [SerializeField] List<GameObject> spawnPoints = new List<GameObject>();
+    [SerializeField] Transform[] spawnPoints;
+
+    bool otherPlayerSpawning = false;
 
     bool random;
     bool roundRobin;
+
+    int spawnPoint1Amount;
+    int spawnPoint2Amount;
 
     enum SpawnOrder{Random, RoundRobin}
     [SerializeField] SpawnOrder spawnOrder = SpawnOrder.Random;
 
     void Start(){
-        for(int i = 0; i <= PhotonNetwork.PlayerList.Length; i++){
-            Vector2 vec = new Vector2(0, 0);
-
-            if(spawnOrder == SpawnOrder.Random){
-                vec = spawnPoints[Random.Range(0, spawnPoints.Count + 1)].transform.position;
-            }
-            else if(spawnOrder == SpawnOrder.RoundRobin){
-                vec = spawnPoints[i].transform.position;
-            }
-            GameObject player = PhotonNetwork.Instantiate(playerPrefab.name, vec, Quaternion.identity);
-            PhotonView view = player.GetComponent<PhotonView>();
+        if(spawnOrder == SpawnOrder.Random){
+            SpawnRandom();
+        }
+        else{
+            SpawnRound();
         }
     }
-    
+    public void SpawnRandom()
+    {
+        int randomIndex = Random.Range(0, spawnPoints.Length);
+        Transform selectedSpawnPoint = spawnPoints[randomIndex];
+        PhotonNetwork.Instantiate(playerPrefab.name, selectedSpawnPoint.position, Quaternion.identity);
+    }
+    public IEnumerator SpawnRound()
+    {
+        yield return new WaitUntil(() => !otherPlayerSpawning);
+        photonView.RPC(nameof(UpdateWaitStatus), RpcTarget.AllBufferedViaServer, true);
+        int i = 3;
+        if(Mathf.Min(
+            spawnPoint1Amount, 
+            spawnPoint2Amount) == 
+            spawnPoint1Amount
+            )
+        {
+            i = 0;
+        } else{
+            i = 1;
+        }
+        PhotonNetwork.Instantiate(playerPrefab.name, spawnPoints[i].position, Quaternion.identity);
+        photonView.RPC(nameof(UpdateSpawnPointPosition), RpcTarget.AllBufferedViaServer, i);
+        photonView.RPC(nameof(UpdateWaitStatus), RpcTarget.AllBufferedViaServer, false);
+    }
+    [PunRPC]
+    public void UpdateSpawnPointPosition(int i){
+        if(i == 0){
+            spawnPoint1Amount++;
+
+        } else{
+            spawnPoint2Amount++;
+        }
+    }
+    [PunRPC]
+    public void UpdateWaitStatus(bool i){
+        otherPlayerSpawning = i;
+    }
 }
