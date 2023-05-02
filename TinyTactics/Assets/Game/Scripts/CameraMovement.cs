@@ -13,6 +13,13 @@ public class CameraMovement : MonoBehaviourPun
     private Vector2 remainingVelocity;
     private bool inputReleased;
 
+    private void Awake(){
+        if(!photonView.IsMine){
+            GetComponent<Camera>().enabled = false;
+            GetComponent<AudioListener>().enabled = false;
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!photonView.IsMine) { return; }
