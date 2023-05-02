@@ -15,7 +15,7 @@ public class UserInput : MonoBehaviourPun
 
     private void Awake()
     {
-        if (!photonView.IsMine) return;
+        if (!photonView.IsMine) this.enabled = false;
         if (instance == null) { instance = this; }
         _playerInput = GetComponent<PlayerInput>();
         SetupInputActions();

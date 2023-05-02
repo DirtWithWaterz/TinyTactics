@@ -16,6 +16,7 @@ public class CameraMovement : MonoBehaviourPun
 
     private void Start()
     {
+        if (!photonView.IsMine) { return; } 
         playerCam = this.transform;
     }
     private void FixedUpdate()

@@ -6,12 +6,11 @@ public class LobbyManager : MonoBehaviourPun
 {
     public GameObject _startButton;
 
-
     public void Start()
     {
+        PhotonNetwork.AutomaticallySyncScene = true;
         if (PhotonNetwork.IsMasterClient)
         {
-            PhotonNetwork.AutomaticallySyncScene = true;
             _startButton.SetActive(true);
         }
     }
