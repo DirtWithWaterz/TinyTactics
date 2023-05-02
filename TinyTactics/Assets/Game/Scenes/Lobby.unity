@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 1423811055}
   - component: {fileID: 1423811054}
   - component: {fileID: 1423811053}
-  - component: {fileID: 1423811052}
+  - component: {fileID: 1423811057}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -143,22 +143,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1423811052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1423811051}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78f56ea79a5a41b46a7e774ee3ed2584, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _startButton: {fileID: 1652841683}
-  nickInput: {fileID: 0}
-  codeInput: {fileID: 0}
-  maxPlayers: 0
 --- !u!114 &1423811053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,6 +225,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1423811057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1423811051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb9b520974596d4b891bcb5a19541eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _startButton: {fileID: 1652841682}
 --- !u!1 &1652841682
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,8 +322,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1423811052}
-        m_TargetAssemblyTypeName: CreateAndJoinRooms, Assembly-CSharp
+      - m_Target: {fileID: 1423811057}
+        m_TargetAssemblyTypeName: LobbyManager, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:

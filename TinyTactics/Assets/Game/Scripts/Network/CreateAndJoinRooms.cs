@@ -7,25 +7,20 @@ using TMPro;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
-    public Transform _startButton;
     [SerializeField] TMP_InputField nickInput;
     [SerializeField] TMP_InputField codeInput;
 
     [SerializeField] byte maxPlayers;
 
-    private void Start()
+
+    public void CreateRoom()
     {
-        if (PhotonNetwork.IsMasterClient){
-            _startButton.gameObject.SetActive(true);
-            PhotonNetwork.AutomaticallySyncScene = true;
-        }
-    }
-    public void CreateRoom(){
-        PhotonNetwork.LocalPlayer.NickName = 
-            nickInput.text == "" ? "0" : 
-            nickInput.text == null ? "Undefined : Case 1" : 
+        PhotonNetwork.LocalPlayer.NickName =
+            nickInput.text == "" ? "0" :
+            nickInput.text == null ? "Undefined : Case 1" :
             nickInput.text;
-        if(PhotonNetwork.LocalPlayer.NickName.Length < 3){
+        if (PhotonNetwork.LocalPlayer.NickName.Length < 3)
+        {
             nickInput.text = "Nick Length >3";
             return;
         }
@@ -34,12 +29,14 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         options.MaxPlayers = maxPlayers;
         PhotonNetwork.CreateRoom(codeInput.text, options, TypedLobby.Default);
     }
-    public void JoinRoom(){
-        PhotonNetwork.LocalPlayer.NickName = 
-            nickInput.text == "" ? "0" : 
-            nickInput.text == null ? "Undefined : Case 1" : 
+    public void JoinRoom()
+    {
+        PhotonNetwork.LocalPlayer.NickName =
+            nickInput.text == "" ? "0" :
+            nickInput.text == null ? "Undefined : Case 1" :
             nickInput.text;
-        if(PhotonNetwork.LocalPlayer.NickName.Length < 3){
+        if (PhotonNetwork.LocalPlayer.NickName.Length < 3)
+        {
             nickInput.text = "Nick Length >3";
             return;
         }
@@ -49,8 +46,5 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.LoadLevel("Lobby");
-    }
-    public void StartGame(){
-        PhotonNetwork.LoadLevel("Game");
     }
 }
