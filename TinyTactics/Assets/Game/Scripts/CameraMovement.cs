@@ -1,14 +1,18 @@
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.InputSystem;
 
 public class CameraMovement : MonoBehaviourPun
 {
     public bool isPanning;
+    [SerializeField] private float zoomSpeed = 0.1f;
     [SerializeField] private float _speed;
     [SerializeField] private float _drag;
     [SerializeField] private float _dampAmount;
     [SerializeField] private Vector2 minBounds;
     [SerializeField] private Vector2 maxBounds;
+    private float targetOrthoSize;
+    Camera cam;
     private Vector2 currentVelocity;
     private Vector2 remainingVelocity;
     private bool inputReleased;
@@ -18,12 +22,17 @@ public class CameraMovement : MonoBehaviourPun
             GetComponent<Camera>().enabled = false;
             GetComponent<AudioListener>().enabled = false;
         }
+        cam = GetComponent<Camera>();
     }
 
     private void FixedUpdate()
     {
         if (!photonView.IsMine) { return; }
 
+        float scrollValue = Mouse.current.scroll.ReadValue().y;
+        targetOrthoSize -= scrollValue * zoomSpeed;
+        targetOrthoSize = Mathf.Clamp(targetOrthoSize, 1f, 4.5f);
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetOrthoSize, zoomSpeed);
         if (UserInput.instance.Panning)
         {
             isPanning = true;

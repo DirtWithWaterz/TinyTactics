@@ -34,10 +34,10 @@ public class TilePlacer : MonoBehaviourPun
             Debug.Log(width);
         }
         Vector3Int pos = new Vector3Int(
-            Mathf.FloorToInt(UserInput.instance.MousePosition.x * 2 +1), 
-            Mathf.FloorToInt(UserInput.instance.MousePosition.y * 2 +1), 
+            Mathf.FloorToInt(UserInput.instance.MousePosition.x * 2 + 1), 
+            Mathf.FloorToInt(UserInput.instance.MousePosition.y * 2 + 1), 
             0);
-        Vector3 worldPosition = groundMap.CellToWorld(pos);
+        Vector3 worldPosition = buildingsMap.CellToWorld(pos);
         previewTile.transform.position = worldPosition;
     }
     public void SelectTile(string tileName)

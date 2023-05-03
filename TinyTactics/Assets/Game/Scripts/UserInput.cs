@@ -7,6 +7,8 @@ public class UserInput : MonoBehaviourPun
     public static UserInput instance;
 
     public bool Panning { get; private set; }
+
+    public float MouseWheel { get; private set; }
     public Vector3 MousePosition { get; private set; }
     public Vector2 MouseInput { get; private set; }
     public bool Interact { get; private set; }
