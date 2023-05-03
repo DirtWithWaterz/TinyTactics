@@ -5,14 +5,13 @@ using UnityEngine.InputSystem;
 public class CameraMovement : MonoBehaviourPun
 {
     public bool isPanning;
-    [SerializeField] private float zoomSpeed = 0.1f;
     [SerializeField] private float _speed;
     [SerializeField] private float _drag;
     [SerializeField] private float _dampAmount;
     [SerializeField] private Vector2 minBounds;
     [SerializeField] private Vector2 maxBounds;
-    private float targetOrthoSize;
-    Camera cam;
+    [SerializeField] Camera cam;
+    [SerializeField] float zoom;
     private Vector2 currentVelocity;
     private Vector2 remainingVelocity;
     private bool inputReleased;
@@ -29,10 +28,11 @@ public class CameraMovement : MonoBehaviourPun
     {
         if (!photonView.IsMine) { return; }
 
-        float scrollValue = Mouse.current.scroll.ReadValue().y;
-        targetOrthoSize -= scrollValue * zoomSpeed;
-        targetOrthoSize = Mathf.Clamp(targetOrthoSize, 1f, 4.5f);
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetOrthoSize, zoomSpeed);
+        float _scrollInput = Input.GetAxis("Mouse ScrollWheel") * zoom;
+        float _target = Mathf.Clamp(cam.orthographicSize - _scrollInput, 1f, 5f);
+        float _lerpSpeed = 5;
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, _target, Time.fixedDeltaTime * _lerpSpeed);
+
         if (UserInput.instance.Panning)
         {
             isPanning = true;

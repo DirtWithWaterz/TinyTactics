@@ -1022,6 +1022,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: 00dce881-a97d-48e8-949a-5c18b17b9a2a
     m_ActionName: Controls/MouseInput[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: c275717a-f450-42d1-bbd7-e8b6fca41df1
+    m_ActionName: Controls/MouseScroll[/Mouse/scroll/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Controls
@@ -1058,6 +1062,8 @@ MonoBehaviour:
   _dampAmount: 1
   minBounds: {x: -25, y: -5}
   maxBounds: {x: 25, y: 5}
+  cam: {fileID: 0}
+  zoom: 10
 --- !u!114 &8371592797448216239
 MonoBehaviour:
   m_ObjectHideFlags: 0
