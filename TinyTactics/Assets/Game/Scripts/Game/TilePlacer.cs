@@ -4,18 +4,26 @@ using Photon.Pun;
 public class TilePlacer : MonoBehaviourPun
 {
 
-    public TileBase[] TileBases;
+    public Tile[] Tiles;
     public Transform[] TileDataObjects;
     [SerializeField] private string selectedTile = null;
     [SerializeField] private byte width;
-    [SerializeField] private Tilemap buildingsMap = null;
+
+    [SerializeField] private Tilemap backgroundMap = null;
     [SerializeField] private Tilemap groundMap = null;
+    [SerializeField] private Tilemap buildingsMap = null;
+    [SerializeField] private Tilemap miscMap = null;
+    [SerializeField] private Tilemap foregroundMap = null;
+
     [SerializeField] private GameObject previewTile = null;
+    private SpriteRenderer previewRenderer;
 
     public void Start()
     {
         buildingsMap = GameObject.Find("Buildings").GetComponent<Tilemap>();
         groundMap = GameObject.Find("Ground").GetComponent<Tilemap>();
+        previewRenderer = previewTile.GetComponent<SpriteRenderer>();
+        previewRenderer.color = new Color(255, 255, 255, 50);
     }
     private void Update()
     {
@@ -25,6 +33,12 @@ public class TilePlacer : MonoBehaviourPun
             Debug.Log(selectedTile);
             Debug.Log(width);
         }
+        Vector3Int pos = new Vector3Int(
+            Mathf.FloorToInt(UserInput.instance.MousePosition.x * 2 +1), 
+            Mathf.FloorToInt(UserInput.instance.MousePosition.y * 2 +1), 
+            0);
+        Vector3 worldPosition = groundMap.CellToWorld(pos);
+        previewTile.transform.position = worldPosition;
     }
     public void SelectTile(string tileName)
     {
@@ -34,13 +48,18 @@ public class TilePlacer : MonoBehaviourPun
             string str = lastChar.ToString();
             width = byte.Parse(str);
             selectedTile = tileName.Substring(0, tileName.Length - 1);
+            foreach(Tile tile in Tiles){
+                if(tile.name == selectedTile){
+                    previewRenderer.sprite = tile.sprite;
+                }
+            }
         }
 
     }
     [PunRPC]
     public void SetTileRPC(Vector3 pos, string _string, byte width)
     {
-        foreach (TileBase tile in TileBases)
+        foreach (Tile tile in Tiles)
         {
             if (tile.name != _string) { continue; }
             Vector3Int position = new Vector3Int(Mathf.FloorToInt(pos.x * 2), Mathf.FloorToInt(pos.y * 2), 0);

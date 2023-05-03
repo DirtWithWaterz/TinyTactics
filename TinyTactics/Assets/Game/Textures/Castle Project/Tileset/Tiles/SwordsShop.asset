@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: Castle Tileset_17
+  m_Name: SwordsShop
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 1534623191, guid: 1150b7763e6a85241bcce69f4ae7e5f5, type: 3}
+  m_Sprite: {fileID: -1668331601, guid: 1150b7763e6a85241bcce69f4ae7e5f5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
