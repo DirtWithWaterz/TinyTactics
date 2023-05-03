@@ -14,6 +14,7 @@ public class UserInput : MonoBehaviourPun
     [SerializeField] private Camera cam;
     private PlayerInput _playerInput;
     private InputAction _panbutton;
+    private InputAction _mouseInput;
     private InputAction _mousepos;
     private InputAction _interactbutton;
 
@@ -28,12 +29,14 @@ public class UserInput : MonoBehaviourPun
     {
         _panbutton = _playerInput.actions["PanButton"];
         _interactbutton = _playerInput.actions["Interact"];
+        _mouseInput = _playerInput.actions["MouseInput"];
         _mousepos = _playerInput.actions["MousePos"];
     }
     private void Update()
     {  
         Panning = _panbutton.IsPressed();
         Interact = _interactbutton.WasPressedThisFrame();
+        MouseInput = _mouseInput.ReadValue<Vector2>();
         Vector2 rawMousePos = _mousepos.ReadValue<Vector2>();
         MousePosition = cam.ScreenToWorldPoint(new Vector3(rawMousePos.x, rawMousePos.y, 0));
     }
