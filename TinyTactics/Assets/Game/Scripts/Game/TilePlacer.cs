@@ -24,6 +24,7 @@ public class TilePlacer : MonoBehaviourPun
         groundMap = GameObject.Find("Ground").GetComponent<Tilemap>();
         previewRenderer = previewTile.GetComponent<SpriteRenderer>();
         previewRenderer.color = new Color(255, 255, 255, 50);
+
     }
     private void Update()
     {
