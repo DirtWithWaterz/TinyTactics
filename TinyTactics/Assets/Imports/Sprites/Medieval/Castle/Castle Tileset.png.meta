@@ -72,7 +72,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -149,18 +149,26 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Castle Tileset_0
+      name: Castle
       rect:
         serializedVersion: 2
         x: 3
         y: 80
         width: 74
-        height: 30
+        height: 20
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-      physicsShape: []
+      physicsShape:
+      - - {x: -33, y: -10}
+        - {x: -33, y: 2}
+        - {x: -37, y: 2}
+        - {x: -37, y: 10}
+        - {x: 37, y: 10}
+        - {x: 37, y: 2}
+        - {x: 33, y: 2}
+        - {x: 33, y: -10}
       tessellationDetail: 0
       bones: []
       spriteID: 823ac4fed60749146bab200adbeb2b5e
@@ -631,6 +639,43 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: Castle Top
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 100
+        width: 74
+        height: 10
+      alignment: 9
+      pivot: {x: 0.5, y: -2}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape:
+      - - {x: -37, y: -5}
+        - {x: -37, y: 5}
+        - {x: -35, y: 5}
+        - {x: -35, y: 1}
+        - {x: -13, y: 1}
+        - {x: -13, y: 5}
+        - {x: -11, y: 5}
+        - {x: -11, y: -5}
+      - - {x: 11, y: -5}
+        - {x: 11, y: 5}
+        - {x: 13, y: 5}
+        - {x: 13, y: 1}
+        - {x: 35, y: 1}
+        - {x: 35, y: 5}
+        - {x: 37, y: 5}
+        - {x: 37, y: -5}
+      tessellationDetail: 0
+      bones: []
+      spriteID: fc1c4328f0306c84ca6498884b4f9b5a
+      internalID: -1199810620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -642,7 +687,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Castle Tileset_0: -609857514
+      Castle: -609857514
       Castle Tileset_1: -645777089
       Castle Tileset_10: -176990950
       Castle Tileset_11: -320587634
@@ -665,6 +710,7 @@ TextureImporter:
       Castle Tileset_7: -1501440931
       Castle Tileset_8: -1516977244
       Castle Tileset_9: 1220306311
+      Castle Top: -1199810620
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
